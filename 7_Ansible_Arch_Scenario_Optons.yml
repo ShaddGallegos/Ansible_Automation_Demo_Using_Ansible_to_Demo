@@ -1,0 +1,32 @@
+---
+- hosts: localhost 
+  become: false
+  gather_facts: false
+
+
+  vars:
+    post_install_message: |
+      https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.1/html/red_hat_ansible_automation_platform_installation_guide/planning-installation#supported_installation_scenarios
+      
+      * Standalone automation controller with an external managed database
+      
+      * Standalone automation hub with a database on the same node, or a 
+        non-installer managed database
+      
+      * Automation controller with an external managed database
+      
+      * Standalone automation hub with an external managed database
+      
+      * Platform installation with a database on the automation controller 
+        node, or non-installer managed database
+      
+      * Platform installation with an external managed database
+      
+      * Multi-machine cluster installation with an external managed database
+
+  tasks:
+    - name: Supported Installation Scenarios
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"
+

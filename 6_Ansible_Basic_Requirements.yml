@@ -1,0 +1,31 @@
+---
+- hosts: localhost 
+  become: false
+  gather_facts: false
+
+
+  vars:
+    post_install_message: |
+      
+      https://access.redhat.com/documentation/en-us/reference_architectures/2021/html-single/deploying_ansible_automation_platform_2.1#prerequisites
+      
+      16 GB of RAM for controller nodes and execution nodes
+      8 GB of RAM for private automation hub nodes
+      4 CPUs for controller nodes and execution nodes
+      2 CPUs for private automation hub nodes
+      5 GB /tmp for use during setup
+      20 GB+ disk space for database node
+      40 GB+ disk space for non database nodes
+      DHCP reservations use infinite leases to deploy the cluster with static IP addresses.
+      DNS records for all nodes
+      Red Hat Enterprise Linux 8.4 or later 64-bit (x86) installed for all nodes
+      Chrony configured for all nodes
+      ansible-core version 2.11 or later installed for all nodes
+
+
+  tasks:
+    - name: Basic Requirements
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"
+

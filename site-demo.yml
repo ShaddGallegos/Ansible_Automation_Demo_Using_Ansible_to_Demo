@@ -1,0 +1,13 @@
+---
+-  import_playbook: 1_RedHat_Coverpage.yml
+-  import_playbook: 2_Topics.yml
+-  import_playbook: 3_What_is_Ansible.yml
+-  import_playbook: 4_Why_Use_Ansible.yml
+-  import_playbook: 5_Ansible_Arch_Node_Types.yml
+-  import_playbook: 6_Ansible_Basic_Requirements.yml
+-  import_playbook: 7_Ansible_Arch_Scenario_Optons.yml
+-  import_playbook: 8_Ansible_Easy_Arch.yml
+-  import_playbook: 9_Ansible_Easy_Arch_Setup_Example.yml
+-  import_playbook: 10_Ansible_Complicated_Arch.yml
+-  import_playbook: 11_Ansible_Complicated_Arch_Setup_Example.yml
+-  import_playbook: 12_LinksToParts.yml

@@ -1,0 +1,28 @@
+---
+- hosts: localhost 
+  become: false
+  gather_facts: false
+
+
+  vars:
+    post_install_message: |
+      ┌───────────────────────────────────┐        ┌────────────────────────────┐
+      │            CONTROLLER             │        │AutomationHub               │
+      │              ┌─────────────────┐  │        │        ┌───────────────┐   │
+      │              │    Database     │  │        │        │   Database    │   │
+      │              └─────────────────┘  │◄──────►│        └───────────────┘   │
+      │                                   │        │                            │
+      │                                   │        │                            │
+      └────────▲──────────────────────────┘        └────────────────────────────┘
+               │
+      ┌────────▼─────────┐
+      │                  │
+      │      GitLab      │
+      │                  │
+      └──────────────────┘
+  tasks:
+    - name: Ansible Easy Arch 
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"
+

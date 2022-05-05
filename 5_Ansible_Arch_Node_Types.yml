@@ -1,0 +1,23 @@
+---
+- hosts: localhost 
+  become: false
+  gather_facts: false
+
+
+  vars:
+    post_install_message: |
+     
+     Controller
+     AutomationHub
+     Hop
+     Database
+     Execution
+     RedHat SSO
+     Service Catalogue 
+
+  tasks:
+    - name: Ansible Arch Node Types
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"
+

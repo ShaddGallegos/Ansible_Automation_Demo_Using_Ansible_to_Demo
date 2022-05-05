@@ -1,0 +1,25 @@
+---
+- hosts: localhost 
+  become: false
+  gather_facts: false
+
+
+  vars:
+    post_install_message: |
+      
+
+      Ansible's key features:
+        Infrastructure as Code
+        Universal automation platform
+        Delivers a documented, deterministic process
+        Idempotence is fundamental
+        Facilitates uniformity, enables continuous delivery
+
+      
+      
+  tasks:
+    - name: Why use Ansible?
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"
+

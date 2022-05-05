@@ -1,0 +1,104 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      # Automation Controller Nodes
+      # There are two valid node_types that can be assigned for this group.
+      # A node_type=control implies that the node will only be able to run 
+      # project and inventory updates, but not regular jobs.
+      # A node_type=hybrid will have the ability to run everything.
+      # If you do not define the node_type, it defaults to hybrid.
+      #
+      # control.example node_type=control
+      # hybrid.example  node_type=hybrid
+      # hybrid2.example <- this will default to hybrid
+      [automationcontroller]
+      controller1.example.com  ansible_connection=local
+      controller2.example.com
+      controller3.example.com
+
+      [automationcontroller:vars]
+      node_type=control
+      peers=execution_nodes
+
+
+      # Execution Nodes
+      # There are two valid node_types that can be assigned for this group.
+      # A node_type=hop implies that the node will forward jobs to an execution node.
+      # A node_type=execution implies that the node will be able to run jobs.
+      # If you do not define the node_type, it defaults to execution.
+      #
+      # hop.example        node_type=hop
+      # execution.example  node_type=execution
+      # execution2.example <- this will default to execution
+      [execution_nodes]
+      execution-node-1.example.com peers=execution-node-2.example.com
+      execution-node-2.example.com peers=execution-node-3.example.com
+      execution-node-3.example.com peers=execution-node-4.example.com node_type=hop
+      execution-node-4.example.com
+
+      [execution_nodes:vars]
+      node_type=execution
+
+      [automationhub]
+      automationhub1.example.com
+      automationhub2.example.com
+      automationhub3.example.com
+
+      [database]
+      database.example.com
+
+
+      [servicescatalog_workers]
+
+      # Single Sign-On
+      # If sso_redirect_host is set, that will be used for application to connect to
+      # SSO for authentication. This must be reachable from client machines.
+      #
+      # ssohost.example sso_redirect_host=<host/ip>
+      [sso]
+
+      [all:vars]
+      admin_password='redhat'
+
+      #Default pg_port is 5432
+      pg_host=''
+      pg_port=''
+
+      pg_database='awx'
+      pg_username='awx'
+      pg_password='redhat'
+      pg_sslmode='prefer'  # set to 'verify-full' for client-side enforced SSL
+
+      # Execution Environment Configuration
+      # Credentials for container registry to pull execution environment images from,
+      # registry_username and registry_password are required for registry.redhat.io
+      registry_url='registry.redhat.io'
+      registry_username='< red hat Username goes here >'
+      registry_password='< red hat Password goes here >'
+
+      # Receptor Configuration
+      #
+      receptor_listener_port=27199
+
+      # Automation Hub Configuration
+      #
+
+      automationhub_admin_password='redhat'
+
+      #Default pg_port is 5432
+      automationhub_pg_host=''
+      automationhub_pg_port=''
+
+      automationhub_pg_database='automationhub'
+      automationhub_pg_username='automationhub'
+      automationhub_pg_password='redhat'
+      automationhub_pg_sslmode='prefer'
+  tasks:
+    - name: Ansible Arch 2
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"

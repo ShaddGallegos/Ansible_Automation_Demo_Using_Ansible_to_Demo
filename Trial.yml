@@ -1,0 +1,23 @@
+---
+- hosts: localhost 
+  become: true 
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      Red Hat Ansible Automation Platform 2.1.x:
+         What you get with this trial:
+         A single, 60-day subscription to Red Hat® Ansible® Automation Platform
+         or installation on Red Hat Enterprise Linux® (a subscription to Red Hat
+         Enterprise Linux is included with this product trial, if not already installed)
+
+         Access to Red Hat's award-winning Customer Portal, including documentation, 
+         helpful videos, discussions, and more!
+
+         Access to Red Hat Ansible Automation Platform hosted services on 
+         Red Hat Hybrid Cloud Console
+  tasks:
+   - name: display post install message
+     debug: msg={{ post_install_message.split('\n') }}
+   - pause:
+       prompt: "Press ENTER to continue"

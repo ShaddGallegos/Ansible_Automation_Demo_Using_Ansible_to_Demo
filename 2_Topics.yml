@@ -1,0 +1,28 @@
+---
+- hosts: localhost 
+  become: false
+  gather_facts: false 
+
+
+  vars:
+    post_install_message: |
+      
+      
+      Ansible
+      AAP
+      Architecture 
+      Nodes Types
+      Instance Groups
+      Execution Environment 
+      Templates
+      Workflows 
+      Workflow Approvals
+      Demo
+      
+
+  tasks:
+    - name: Topics
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"
+

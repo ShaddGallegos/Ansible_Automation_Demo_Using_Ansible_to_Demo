@@ -1,0 +1,30 @@
+---
+- hosts: localhost 
+  become: false 
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      
+      https://www.ansible.com/overview/how-ansible-works?hsLang=en-us
+      
+      Ansible is 
+      An automation engine for use with multiple platforms, 
+      multiple tiers, and to address multiple use cases.
+      
+
+      Ansible is -
+        Agentless
+        Easy to deploy
+
+      Uses a universal, human-readable language -
+        YAML
+        No special coding skills needed
+
+      
+  tasks:
+    - name: What is Ansible?
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"
+

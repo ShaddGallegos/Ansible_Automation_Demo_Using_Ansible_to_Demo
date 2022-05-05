@@ -1,0 +1,40 @@
+---
+- hosts: localhost 
+  become: true 
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+        Developer License:
+         * https://developers.redhat.com/articles/faqs-no-cost-red-hat-enterprise-linux?source=sso
+         * https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/registrations
+
+        Product Documentation
+         * https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.1
+         * https://access.redhat.com/documentation/en-us/red_hat_satellite/6.10
+ 
+        RHEL8.5 (For AutomationHub and Ansible Automation Platform)
+         * https://access.redhat.com/downloads/content/479/ver=/rhel---8/8.5/x86_64/product-software
+
+        RHEL7.9 (If you want to install Satellite 6.10)
+         * https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.9/x86_64/product-software
+        
+        Ansible (AAP) Entitlements:
+         * https://www.redhat.com/en/technologies/management/ansible/try-it
+        
+        API Keys: (store these in a safe place)
+          Red Hat
+           * https://access.redhat.com/articles/3626371
+           * https://access.redhat.com/management/api
+        
+          Red Hat Console API Key (Need to obtain AAP Entitlements first)
+           * https://console.redhat.com/ansible/automation-hub/token
+
+          Ansible Galaxy (Need a github user)
+           * https://galaxy.ansible.com/me/preferences
+
+  tasks:
+   - name: Getting Started with Red Hat Management Portfolio
+     debug: msg={{ post_install_message.split('\n') }}
+   - pause:
+       prompt: "Press ENTER to continue"

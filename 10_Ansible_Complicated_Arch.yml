@@ -1,0 +1,39 @@
+---
+- hosts: localhost 
+  become: false
+  gather_facts: false
+
+
+  vars:
+    post_install_message: |
+     ┌────────────┐                 ┌────────────────┐
+     │ Controller1│                 │ AutomationHub1 │
+     ├────────────┤                 ├────────────────┤
+     │ Controller2│                 │ AutomationHub2 │
+     ├────────────┤                 ├────────────────┤
+     │ Controller3│   ┌──────────┐  │ AutomationHub3 │
+     └────▲───────┤   │          │  ├─────────┬──────┘
+          │       └───► Database ◄──┘         │
+          │           │          │            │
+          │           └──────────┴────────────┼──────────────────────────────────┐
+          │                                   │                                  │
+         ┌┴───────────────────────────────────▼───────────────────────────────┐  │
+         │                        Automation Mesh                             │  │
+         └───────▲─────────┬───────────────┬────────────────┬─────────────────┤  │
+                 │         │ Execution Node│ Execution Node │ Execution Node  │  │
+            ┌────▼─────┐   │               │                │                 │  │
+            │ Hop Node │   │ EE EE EE EE   │  EE EE EE EE   │  EE EE EE EE    │  │
+            └────▲─────┘   └───────────────┴────────────────┴─────────────────┘  │
+                 │                                                               │
+                 │                 ┌─────────────────────────────────────────────┘
+            ┌────▼────────────┐    │
+            │ Execution Node  │    │ ┌─────────┐
+            │                 │    └►│  GitLab │
+            │  EE EE EE EE    │      └─────────┘
+            └─────────────────┘
+  tasks:
+    - name: Ansible Arch 2
+      debug: msg={{ post_install_message.split('\n') }}
+    - pause:
+        prompt: "Press ENTER to continue"
+

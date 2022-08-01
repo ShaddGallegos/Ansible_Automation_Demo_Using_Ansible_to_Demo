@@ -10,13 +10,19 @@
          * https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/registrations
 
         Product Documentation
-         * https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.1
-         * https://access.redhat.com/documentation/en-us/red_hat_satellite/6.10
- 
-        RHEL8.5 (For AutomationHub and Ansible Automation Platform)
-         * https://access.redhat.com/downloads/content/479/ver=/rhel---8/8.5/x86_64/product-software
+         * https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.2
+         * https://access.redhat.com/documentation/en-us/red_hat_satellite/6.11
+         
+        Download Red Hat Ansible Automation Platform (Bundle)
+         * https://access.redhat.com/downloads/content/480/ver=2.2/rhel---9/2.2/x86_64/product-software
 
-        RHEL7.9 (If you want to install Satellite 6.10)
+        RHEL9   (For AutomationHub and Ansible Automation Platform)
+         * https://access.redhat.com/downloads/content/479/ver=/rhel---9/9.0/x86_64/product-software
+
+        RHEL8.6 (For AutomationHub and Ansible Automation Platform)
+         * https://access.redhat.com/downloads/content/479/ver=/rhel---8/8.6/x86_64/product-software
+
+        RHEL7.9 (If you want to install Satellite 6.11 or older Tower 3.5.x^)
          * https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.9/x86_64/product-software
         
         Ansible (AAP) Entitlements:

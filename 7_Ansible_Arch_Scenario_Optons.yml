@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      DEPLOYMENT SCENARIOS FOR AAP 2.7
+      =====================================================================
+
+      Scenario A: Single-node lab
+      - Fast PoC and training setup
+      - Lowest ops cost
+      - Not HA
+
+      Scenario B: Standard production
+      - Controller + execution + hub + external DB
+      - Balanced reliability and complexity
+      - Strong default for many enterprises
+
+      Scenario C: Enterprise scale
+      - Multi-controller clusters, automation mesh, segmented execution
+      - DR strategy and strict change controls
+      - Built for high concurrency and regulated environments
+
+      Scenario D: OpenShift-first platform
+      - Container-native operations model
+      - Works well with existing OpenShift governance
+
+      Decision inputs:
+      - host count and expected job concurrency
+      - network segmentation and latency
+      - compliance and audit requirements
+      - team operating model and support maturity
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Deployment scenarios slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

@@ -1,0 +1,44 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      CURRENT REQUIREMENTS (RHEL + AAP 2.7 + TOOLING)
+      =====================================================================
+
+      Platform baseline:
+      - RHEL 9.x or RHEL 10.x recommended
+      - x86_64 enterprise nodes with stable DNS + NTP
+      - SELinux enforcing and patched OS images
+
+      Typical sizing starting points:
+      - Controller: 4 vCPU / 16+ GB RAM
+      - Execution node: 4 vCPU / 16+ GB RAM
+      - Hub: 2 vCPU / 8+ GB RAM
+      - PostgreSQL: 4 vCPU / 16+ GB RAM / fast storage
+
+      Automation content developer stack:
+      - ansible-core
+      - ansible-dev-tools (includes linting and helpers)
+      - ansible-lint
+      - ansible-navigator
+      - molecule (optional, role-level tests)
+      - pre-commit for local quality gates
+
+      Security fundamentals:
+      - Secrets in vault/credential stores, never in repo
+      - Signed and curated EE images where possible
+      - Token and service-account least privilege
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Requirements slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

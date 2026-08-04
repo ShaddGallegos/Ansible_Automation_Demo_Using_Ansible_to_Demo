@@ -1,0 +1,49 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      ENTERPRISE SETUP EXAMPLE (PRACTICAL)
+      =====================================================================
+
+      Inventory excerpt
+      [automationcontroller]
+      aap-ctrl-01.example.com
+      aap-ctrl-02.example.com
+      aap-ctrl-03.example.com
+
+      [execution_nodes]
+      aap-exec-01.example.com
+      aap-exec-02.example.com
+      aap-hop-01.example.com node_type=hop peers=aap-exec-03.example.com
+      aap-exec-03.example.com
+
+      [automationhub]
+      aap-hub-01.example.com
+
+      [database]
+      aap-db-01.example.com
+
+      Variable pattern
+      admin_password: "{{ vault_admin_password }}"
+      pg_password: "{{ vault_pg_password }}"
+      registry_password: "{{ vault_registry_password }}"
+
+      Delivery pattern
+      - run lint and syntax checks in CI first
+      - run preflight in lower environment
+      - execute change with approvals
+      - capture report artifacts for audit
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Enterprise setup slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

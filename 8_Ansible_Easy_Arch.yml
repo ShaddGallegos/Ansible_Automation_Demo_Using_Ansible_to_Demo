@@ -1,0 +1,38 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      SIMPLE ARCHITECTURE: START SMALL, STAY CLEAN
+      =====================================================================
+
+      Layout:
+      [controller + hub + db] on one strong node
+
+      Best for:
+      - demos and enablement labs
+      - early internal platform pilots
+      - small operations teams
+
+      Benefits:
+      - fastest path to value
+      - easiest backup/restore story
+      - low infrastructure overhead
+
+      Guardrails:
+      - keep production credentials externalized
+      - still use Git, linting, and code review
+      - plan an upgrade path to multi-node before scale pressure
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Simple architecture slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

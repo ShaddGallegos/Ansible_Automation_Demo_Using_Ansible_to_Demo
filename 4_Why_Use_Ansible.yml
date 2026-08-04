@@ -1,0 +1,37 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      WHY TEAMS USE ANSIBLE + AAP 2.7
+      =====================================================================
+
+      Business outcomes:
+      - Fewer manual tickets and faster change windows
+      - Consistent delivery across dev/test/prod
+      - Better compliance evidence and audit trails
+      - Safer operations through approvals and policy gates
+
+      Engineering outcomes:
+      - One automation language across Linux, Windows, network, cloud
+      - Reproducible workflows with Git as source of truth
+      - Standardized runtime via execution environments
+      - Easy handoff from platform teams to app teams
+
+      Leadership outcomes:
+      - Better visibility into who changed what and when
+      - Reduced drift and incident volume over time
+      - Faster onboarding through reusable role patterns
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Why use Ansible slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

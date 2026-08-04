@@ -1,0 +1,42 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      USEFUL LINKS (CURRENT)
+      =====================================================================
+
+      Red Hat Ansible Automation Platform docs
+      https://access.redhat.com/documentation/
+
+      Ansible community docs
+      https://docs.ansible.com/
+
+      Automation Hub on Hybrid Cloud Console
+      https://console.redhat.com/ansible/automation-hub
+
+      Red Hat developer resources
+      https://developers.redhat.com/
+
+      Ansible workshops
+      https://github.com/ansible/workshops
+
+      Community forum
+      https://forum.ansible.com/
+
+      Hint:
+      pin the exact major/minor docs in customer-facing runbooks,
+      but keep this slide on stable top-level URLs.
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Links slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

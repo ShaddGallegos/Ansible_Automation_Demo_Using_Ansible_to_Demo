@@ -1,0 +1,4 @@
+---
+ansible_automation_demo_using_ansible_to_demo_use_local_defaults_env: true
+ansible_automation_demo_using_ansible_to_demo_defaults_env_file: "{{ playbook_dir | dirname }}/defaults/env.yml"
+ansible_automation_demo_using_ansible_to_demo_local_defaults_precedence: "noninteractive"

@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      AAP TRIAL OVERVIEW
+      =====================================================================
+
+      Red Hat Ansible Automation Platform trial includes:
+      - Time-bound evaluation subscription for platform capabilities
+      - Access to Red Hat documentation and support resources
+      - Hybrid Cloud Console integrations for platform workflows
+
+      Recommended next steps after trial starts:
+      1) Build a baseline org/team/credential model
+      2) Import one real project from Git
+      3) Add a workflow with an approval gate
+      4) Capture an ops report as an artifact
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Display trial overview
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

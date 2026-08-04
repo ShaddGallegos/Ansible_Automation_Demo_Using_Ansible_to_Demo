@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      TOPICS
+      =====================================================================
+
+      1. What Ansible is in 2026
+      2. Why teams standardize on AAP 2.7
+      3. Node types, mesh, and execution strategy
+      4. Current RHEL and platform prerequisites
+      5. Deployment patterns: simple to enterprise
+      6. Dev workflow: ansible-dev-tools + CI
+      7. Example inventories and secure vars
+      8. Useful links and next steps
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Topics slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

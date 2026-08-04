@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      AAP 2.7 NODE TYPES (AT A GLANCE)
+      =====================================================================
+
+      Automation Controller
+      - UI, API, scheduling, RBAC, workflow orchestration
+
+      Execution Nodes
+      - Run jobs inside execution environments
+      - Scale horizontally for concurrency
+
+      Hop Nodes (Automation Mesh)
+      - Bridge network segments and constrained zones
+      - Improve reachability without opening broad access
+
+      Private Automation Hub
+      - Curated collections and execution environment artifacts
+      - Content trust and lifecycle control
+
+      Event-Driven Ansible
+      - Rulebooks consuming monitoring/security/cloud events
+      - Trigger automation in near real time
+
+      Gateway + Shared Services
+      - Unified access plane for platform components
+
+      Design rule:
+      separate control-plane services from execution-plane capacity.
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Node types slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

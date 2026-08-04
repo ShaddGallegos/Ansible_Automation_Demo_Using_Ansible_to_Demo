@@ -1,0 +1,48 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      SIMPLE SETUP EXAMPLE (SECURE-BY-DEFAULT STYLE)
+      =====================================================================
+
+      inventory.ini (excerpt)
+      [automationcontroller]
+      aap-lab-01.example.com
+
+      [automationhub]
+      aap-lab-01.example.com
+
+      [database]
+      aap-lab-01.example.com
+
+      group_vars/all.yml (safe pattern)
+      admin_password: "{{ vault_admin_password }}"
+      pg_password: "{{ vault_pg_password }}"
+      registry_url: "registry.redhat.io"
+      registry_username: "{{ vault_registry_user }}"
+      registry_password: "{{ vault_registry_password }}"
+
+      install flow
+      1) validate inventory and DNS
+      2) run preflight checks
+      3) deploy platform
+      4) verify API and login
+
+      post-install quick wins
+      - create org/team/credential baseline
+      - import starter project and template
+      - add approval node in workflow
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Simple setup slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

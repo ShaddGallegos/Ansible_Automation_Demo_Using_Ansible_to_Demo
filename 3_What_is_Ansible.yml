@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      WHAT IS ANSIBLE TODAY?
+      =====================================================================
+
+      Ansible is a language and runtime for automation that treats operations
+      as versioned code: infra, app deploys, compliance, and event response.
+
+      Core characteristics:
+      - Agentless over SSH/WinRM/API
+      - YAML-first playbooks and roles
+      - Idempotent desired-state execution
+      - Reusable collections and execution environments
+
+      Where AAP extends upstream ansible-core:
+      - RBAC, SSO, approvals, and governance
+      - Schedules, workflows, notifications, webhooks
+      - Enterprise API and auditability
+      - Scalable execution with automation mesh
+
+      Think of it as:
+      ansible-core = engine
+      AAP = enterprise operating model around that engine
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: What is Ansible slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

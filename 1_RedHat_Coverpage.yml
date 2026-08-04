@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      RED HAT AUTOMATION DEMO 2026
+      Ansible + AAP 2.7 + RHEL 9/10
+      =====================================================================
+
+      Presenter: Shadd Gallegos
+      Focus: practical enterprise automation outcomes
+
+      Demo themes:
+      - Modern platform architecture
+      - Faster, safer content delivery
+      - Day-0 through Day-2 operations
+      - Security and compliance by default
+
+      Built for human-readable walkthroughs in terminal slide mode.
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Cover page
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"

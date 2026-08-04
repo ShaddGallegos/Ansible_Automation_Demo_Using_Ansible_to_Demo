@@ -1,0 +1,42 @@
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+
+  vars:
+    post_install_message: |
+      =====================================================================
+      ENTERPRISE ARCHITECTURE (REFERENCE MODEL)
+      =====================================================================
+
+      north-south access
+      [load balancer]
+              |
+      [controller cluster x3]
+              |
+      [external PostgreSQL HA]
+
+      east-west execution
+      [mesh hop nodes] --- [execution pools by zone]
+
+      content plane
+      [private automation hub + signed EE images]
+
+      event plane
+      [eda controller + event sources + rulebooks]
+
+      Why this model works:
+      - resilient control plane
+      - segmented execution boundaries
+      - predictable scale for concurrent jobs
+      - governance that keeps velocity high
+
+  tasks:
+    - name: Clear screen
+      ansible.builtin.command: reset
+      changed_when: false
+    - name: Enterprise architecture slide
+      ansible.builtin.debug:
+        msg: "{{ post_install_message.split('\\n') }}"
+    - ansible.builtin.pause:
+        prompt: "Press ENTER to continue"
